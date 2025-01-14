@@ -3,7 +3,7 @@ package gspacenotif
 import (
 	"testing"
 
-	"github.com/techgoa/gspacenotif/internal/types"
+	gspacenotif "github.com/techgoa/gspacenotif/types"
 )
 
 func TestNewNotifier(t *testing.T) {
@@ -60,7 +60,7 @@ func TestSendProductError(t *testing.T) {
 		LoggerFunc:    testLogger,
 	})
 
-	err := notifier.SendProductError(types.ProductErrorParams{
+	err := notifier.SendProductError(gspacenotif.ProductErrorParams{
 		Title:             "Test Error",
 		Error:             "Test error message",
 		ShopID:            "123",

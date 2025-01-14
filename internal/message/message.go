@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/techgoa/gspacenotif/internal/types"
+	gspacenotif "github.com/techgoa/gspacenotif/types"
 )
 
-func FormatProductErrorMessage(ecommerceName string, params types.ProductErrorParams) string {
+func FormatProductErrorMessage(ecommerceName string, params gspacenotif.ProductErrorParams) string {
 	return fmt.Sprintf(`❌ *%s* ❌
 
 *%s Merchant ID:*

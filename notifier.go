@@ -6,8 +6,20 @@ import (
 	"github.com/techgoa/gspacenotif/internal/http"
 	"github.com/techgoa/gspacenotif/internal/logger"
 	"github.com/techgoa/gspacenotif/internal/message"
-	"github.com/techgoa/gspacenotif/internal/types"
+	gspacenotif "github.com/techgoa/gspacenotif/types"
 )
+
+type NotifierConfig struct {
+	WebhookURL      string
+	EcommerceName   string
+	LoggerFunc      func(level, source, payload, err string)
+	LogLevelWarning string
+}
+
+type Notifier struct {
+	config NotifierConfig
+	client *http.Client
+}
 
 func NewNotifier(config NotifierConfig) *Notifier {
 	if config.EcommerceName == "" {
@@ -26,7 +38,7 @@ func NewNotifier(config NotifierConfig) *Notifier {
 	}
 }
 
-func (n *Notifier) SendProductError(params types.ProductErrorParams) error {
+func (n *Notifier) SendProductError(params gspacenotif.ProductErrorParams) error {
 	formattedMessage := message.FormatProductErrorMessage(n.config.EcommerceName, params)
 
 	googleSpacesRequest, err := message.CreateGoogleSpacesPayload(formattedMessage)

@@ -1,4 +1,4 @@
-package types
+package gspacenotif
 
 import (
 	"encoding/json"

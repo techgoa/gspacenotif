@@ -1,4 +1,8 @@
-package types
+package gspacenotif
+
+type MessagePayload struct {
+	Text string `json:"text"`
+}
 
 type ProductErrorParams struct {
 	Title             string
@@ -6,8 +10,4 @@ type ProductErrorParams struct {
 	ShopID            string
 	ProductMerchantID string
 	Response          string
-}
-
-type MessagePayload struct {
-	Text string `json:"text"`
 }
