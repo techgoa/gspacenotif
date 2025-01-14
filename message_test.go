@@ -1,24 +1,22 @@
-package message
+package gspacenotif
 
 import (
 	"encoding/json"
 	"strings"
 	"testing"
-
-	gspacenotif "github.com/techgoa/gspacenotif/types"
 )
 
 func TestFormatProductErrorMessage(t *testing.T) {
 	tests := []struct {
 		name          string
 		ecommerceName string
-		params        gspacenotif.ProductErrorParams
+		params        ProductErrorParams
 		wantContains  []string
 	}{
 		{
 			name:          "Normal message",
 			ecommerceName: "TestStore",
-			params: gspacenotif.ProductErrorParams{
+			params: ProductErrorParams{
 				Title:             "Test Error",
 				Error:             "Error message",
 				ShopID:            "123",
@@ -37,7 +35,7 @@ func TestFormatProductErrorMessage(t *testing.T) {
 		{
 			name:          "Empty ecommerce name",
 			ecommerceName: "",
-			params: gspacenotif.ProductErrorParams{
+			params: ProductErrorParams{
 				Title: "Test",
 				Error: "Error",
 			},
@@ -87,7 +85,7 @@ func TestCreateGoogleSpacesPayload(t *testing.T) {
 				return
 			}
 
-			var result gspacenotif.MessagePayload
+			var result MessagePayload
 			if err := json.Unmarshal(payload, &result); err != nil {
 				t.Errorf("Failed to unmarshal payload: %v", err)
 				return

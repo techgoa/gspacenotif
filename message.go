@@ -1,13 +1,23 @@
-package message
+package gspacenotif
 
 import (
 	"encoding/json"
 	"fmt"
-
-	gspacenotif "github.com/techgoa/gspacenotif/types"
 )
 
-func FormatProductErrorMessage(ecommerceName string, params gspacenotif.ProductErrorParams) string {
+type ProductErrorParams struct {
+	Title             string
+	Error             string
+	ShopID            string
+	ProductMerchantID string
+	Response          string
+}
+
+type MessagePayload struct {
+	Text string `json:"text"`
+}
+
+func FormatProductErrorMessage(ecommerceName string, params ProductErrorParams) string {
 	return fmt.Sprintf(`❌ *%s* ❌
 
 *%s Merchant ID:*

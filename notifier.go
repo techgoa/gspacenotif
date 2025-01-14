@@ -5,8 +5,6 @@ import (
 
 	"github.com/techgoa/gspacenotif/internal/http"
 	"github.com/techgoa/gspacenotif/internal/logger"
-	"github.com/techgoa/gspacenotif/internal/message"
-	gspacenotif "github.com/techgoa/gspacenotif/types"
 )
 
 type NotifierConfig struct {
@@ -38,10 +36,10 @@ func NewNotifier(config NotifierConfig) *Notifier {
 	}
 }
 
-func (n *Notifier) SendProductError(params gspacenotif.ProductErrorParams) error {
-	formattedMessage := message.FormatProductErrorMessage(n.config.EcommerceName, params)
+func (n *Notifier) SendProductError(params ProductErrorParams) error {
+	formattedMessage := FormatProductErrorMessage(n.config.EcommerceName, params)
 
-	googleSpacesRequest, err := message.CreateGoogleSpacesPayload(formattedMessage)
+	googleSpacesRequest, err := CreateGoogleSpacesPayload(formattedMessage)
 	if err != nil {
 		n.config.LoggerFunc(n.config.LogLevelWarning,
 			params.Title+" ERR PREPARING GOOGLE SPACES NOTIFICATION",
