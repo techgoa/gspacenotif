@@ -7,6 +7,7 @@ import (
 	"github.com/techgoa/gspacenotif/internal/logger"
 )
 
+// NotifierConfig contains configuration options for the notifier.
 type NotifierConfig struct {
 	WebhookURL      string
 	EcommerceName   string
@@ -14,11 +15,14 @@ type NotifierConfig struct {
 	LogLevelWarning string
 }
 
+// Notifier handles sending notifications to Google Spaces.
 type Notifier struct {
 	config NotifierConfig
 	client *http.Client
 }
 
+// NewNotifier creates a new Notifier instance with the provided configs.
+// It sets default value for unspecified config options.
 func NewNotifier(config NotifierConfig) *Notifier {
 	if config.EcommerceName == "" {
 		config.EcommerceName = "Undefined"
@@ -36,6 +40,8 @@ func NewNotifier(config NotifierConfig) *Notifier {
 	}
 }
 
+// SendProductError sends a formatted error message to Google Spaces
+// with the provided product error parameters.
 func (n *Notifier) SendProductError(params ProductErrorParams) error {
 	formattedMessage := FormatProductErrorMessage(n.config.EcommerceName, params)
 

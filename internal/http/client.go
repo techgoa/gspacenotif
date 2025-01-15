@@ -1,3 +1,5 @@
+// Package http provides internal HTTP client functionality
+// for sending message to Google Spaces.
 package http
 
 import (
@@ -7,16 +9,20 @@ import (
 	"strings"
 )
 
+// Client wraps standard http.Client for sending messages.
 type Client struct {
 	httpClient *http.Client
 }
 
+// NewClient creates a new HTTP client instance.
 func NewClient() *Client {
 	return &Client{
 		httpClient: &http.Client{},
 	}
 }
 
+// SendMessage sends a POST request to the specified webhook URL
+// with the provided request body.
 func (c *Client) SendMessage(webhookURL string, request string) error {
 	r := strings.NewReader(request)
 	req, err := http.NewRequest(http.MethodPost, webhookURL, r)
